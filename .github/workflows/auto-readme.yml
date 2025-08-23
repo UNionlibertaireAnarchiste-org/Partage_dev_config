@@ -3,6 +3,10 @@ name: Génération README automatique
 on:
   push:
     branches: [main]
+  workflow_run:
+    workflows: ["Tests automatiques"]
+    types: [completed]
+    branches: [main]
   schedule:
     - cron: '0 2 * * *'
 
@@ -42,6 +46,31 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+        
+        # Pull des derniers changements pour éviter conflits
+        git pull origin main || true
+        
+        # Regénérer INDEX.md avec les derniers chiffres
+        cat > INDEX.md << EOF
+        # Index des Contributions
+        
+        *Généré automatiquement le $(date)*
+        
+        ## 📊 Statistiques
+        - Scripts: $(find scripts -name "*.py" -o -name "*.sh" -o -name "*.js" | wc -l)
+        - Exemples: $(find examples -mindepth 2 -name "README.md" | wc -l)
+        - Configurations: $(find configs -name "*" -type f | wc -l)
+        
+        ## 🐍 Scripts Python
+        $(find scripts/python -name "*.py" -exec basename {} \; | grep -v __pycache__ | sort)
+        
+        ## 🔧 Scripts Bash
+        $(find scripts/bash -name "*.sh" -exec basename {} \; | sort)
+        
+        ## ⚙️ Automatisation
+        README.md
+        EOF
+        
         git add INDEX.md
         if ! git diff --staged --quiet; then
           git commit -m "docs: mise à jour automatique de l'index [skip ci]"
