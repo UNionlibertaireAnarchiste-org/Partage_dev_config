@@ -1,4 +1,4 @@
-# Indignons-nous 🚀
+# Collectif Indignons-nous bloquons tout
 
 <img src="https://indignonsnous.fr/global/img/logo-inbt.svg" alt="Logo Indignons-nous" width="200">
 
@@ -14,15 +14,15 @@ Cet espace collectif permet à l'équipe de :
 - Collaborer sur des projets communs
 - Co-construire les bonnes pratiques de l'équipe
 
-## 📁 Structure
+## 📁 Structure du projet
 
 ```
-indignons-nous/
-├── docs/           # Documentation collective et guides techniques
-├── scripts/        # Scripts et outils partagés
-├── examples/       # Projets de référence et templates
-├── configs/        # Configurations échangées
-└── .github/        # Automatisations et workflows
+partage-dev/
+├── docs/           # Documentation et guides
+├── scripts/        # Scripts utiles pour le développement
+├── examples/       # Projets exemples et templates
+├── configs/        # Configurations d'environnement
+└── .github/        # Workflows et templates GitHub
 ```
 
 ## 🤝 Comment contribuer
@@ -59,5 +59,4 @@ Ce dépôt utilise GitHub Actions pour :
 
 ---
 
-**Équipe Indignons-nous - 10 septembre 2025**  
-*Partageons nos outils et construisons ensemble !*
+**Contribuez et partagez vos outils de développement avec la communauté !**
