@@ -81,5 +81,5 @@ Ce dépôt utilise GitHub Actions pour :
 
 ---
 
-**Équipe Indignons-nous - 10 septembre 2025**  
+**Indignons-nous bloquons tout - 10 septembre 2025**  
 *Partageons nos outils et construisons ensemble !*
