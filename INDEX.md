@@ -1,9 +1,9 @@
 # Index des Contributions
 
-*Généré automatiquement le Sat Aug 23 17:35:05 UTC 2025*
+*Généré automatiquement le Sat Aug 23 19:24:18 UTC 2025*
 
 ## 📊 Statistiques
-- Scripts: 1
+- Scripts: 2
 - Exemples: 0
 - Configurations: 5
 
@@ -11,6 +11,7 @@
 git_stats.py
 
 ## 🔧 Scripts Bash
+deploy.sh
 
 ## ⚙️ Automatisation
 README.md
