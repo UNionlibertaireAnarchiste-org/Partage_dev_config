@@ -6,6 +6,11 @@ on:
   check_suite:
     types: [completed]
 
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
 jobs:
   auto-merge:
     if: github.event.review.state == 'approved' || github.event.check_suite.conclusion == 'success'
@@ -13,6 +18,7 @@ jobs:
     steps:
     - name: Auto-merge si conditions remplies
       uses: pascalgn/merge-action@v0.15.6
+      continue-on-error: true
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         merge_method: squash
