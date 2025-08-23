@@ -44,9 +44,11 @@ jobs:
     - name: Format Shell scripts
       run: |
         # Install shfmt
-        curl -L https://github.com/mvdan/sh/releases/latest/download/shfmt_v3.7.0_linux_amd64 -o shfmt
+        curl -L https://github.com/mvdan/sh/releases/download/v3.7.0/shfmt_v3.7.0_linux_amd64 -o shfmt
         chmod +x shfmt
-        find . -name "*.sh" -exec ./shfmt -w {} +
+        if [ -n "$(find . -name "*.sh" -print -quit)" ]; then
+          find . -name "*.sh" -exec ./shfmt -w {} +
+        fi
     
     - name: Créer PR pour formatage
       uses: peter-evans/create-pull-request@v5
