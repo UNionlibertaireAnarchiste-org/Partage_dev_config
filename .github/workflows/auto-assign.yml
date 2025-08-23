@@ -39,10 +39,14 @@ jobs:
           reviewers = [...new Set(reviewers)].filter(r => r !== context.actor);
           
           if (reviewers.length > 0) {
-            await github.rest.pulls.requestReviewers({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-              reviewers: reviewers.slice(0, 2) // Max 2 reviewers
-            });
+            try {
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                reviewers: reviewers.slice(0, 2) // Max 2 reviewers
+              });
+            } catch (error) {
+              console.log('Assignation reviewer échouée:', error.message);
+            }
           }
