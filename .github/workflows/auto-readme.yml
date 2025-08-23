@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   update-readme:
@@ -39,22 +38,12 @@ jobs:
         echo -e "\n## ⚙️ Automatisation" >> INDEX.md
         find scripts/automation -name "*" -type f -exec basename {} \; | sort >> INDEX.md
     
-    - name: Commit si changements
+    - name: Commit et push INDEX.md
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add INDEX.md
         if ! git diff --staged --quiet; then
-          git commit -m "docs: mise à jour automatique de l'index"
-          echo "INDEX_UPDATED=true" >> $GITHUB_ENV
+          git commit -m "docs: mise à jour automatique de l'index [skip ci]"
+          git push || echo "Push échoué - permissions insuffisantes"
         fi
-    
-    - name: Créer PR pour INDEX.md
-      if: env.INDEX_UPDATED == 'true'
-      uses: peter-evans/create-pull-request@v5
-      with:
-        token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
-        commit-message: "docs: mise à jour automatique de l'index"
-        title: "🤖 Mise à jour automatique INDEX.md"
-        body: "Mise à jour automatique de l'index des contributions"
-        branch: "auto/update-index"
