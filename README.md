@@ -4,7 +4,7 @@
 
 **Bienvenue sur l'espace collectif du 10 septembre 2025**
 
-Espace collaboratif de l'équipe Indignons-nous pour échanger projets, scripts et configurations de développement.
+Espace collaboratif  Indignons-nous bloquons tout pour échanger projets, scripts et configurations de développement.
 
 ## 🎯 Objectif
 
