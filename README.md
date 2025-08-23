@@ -1,24 +1,26 @@
-# Partage Dev 🚀
+# Site Indignons-nous 🚀
 
-Un dépôt communautaire pour partager des projets, scripts et configurations de développement entre développeurs/se.
+**Bienvenue sur le wiki du site partagé du 10 septembre 2025**
+
+Dépôt collaboratif de l'équipe Indignons-nous pour partager projets, scripts et configurations de développement.
 
 ## 🎯 Objectif
 
-Ce dépôt sert de plateforme où les développeurs peuvent :
-- Partager des scripts utiles et des outils de développement
-- Échanger des configurations d'environnement
-- Présenter des projets exemples et des templates
-- Collaborer sur des solutions communes
+Ce site partagé permet à l'équipe de :
+- Centraliser les outils et scripts de développement
+- Partager les configurations d'environnement optimisées
+- Collaborer sur des projets communs
+- Documenter les bonnes pratiques de l'équipe
 
-## 📁 Structure du projet
+## 📁 Structure du site
 
 ```
-partage-dev/
-├── docs/           # Documentation et guides
-├── scripts/        # Scripts utiles pour le développement
-├── examples/       # Projets exemples et templates
-├── configs/        # Configurations d'environnement
-└── .github/        # Workflows et templates GitHub
+indignons-nous/
+├── docs/           # Documentation équipe et guides techniques
+├── scripts/        # Scripts et outils de l'équipe
+├── examples/       # Projets de référence et templates
+├── configs/        # Configurations partagées
+└── .github/        # Automatisations et workflows
 ```
 
 ## 🤝 Comment contribuer
@@ -55,4 +57,5 @@ Ce dépôt utilise GitHub Actions pour :
 
 ---
 
-**Contribuez et partagez vos outils de développement avec la communauté !**
+**Équipe Indignons-nous - 10 septembre 2025**  
+*Partageons nos outils et construisons ensemble !*
