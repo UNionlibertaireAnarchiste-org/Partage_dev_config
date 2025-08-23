@@ -1,14 +1,18 @@
-# Partage Dev 🚀
+# Collectif Indignons-nous bloquons tout
 
-Un dépôt communautaire pour partager des projets, scripts et configurations de développement entre développeurs/se.
+<img src="https://indignonsnous.fr/global/img/logo-inbt.svg" alt="Logo Indignons-nous" width="200">
+
+**Bienvenue sur l'espace collectif du 10 septembre 2025**
+
+Espace collaboratif de l'équipe Indignons-nous pour échanger projets, scripts et configurations de développement.
 
 ## 🎯 Objectif
 
-Ce dépôt sert de plateforme où les développeurs peuvent :
-- Partager des scripts utiles et des outils de développement
-- Échanger des configurations d'environnement
-- Présenter des projets exemples et des templates
-- Collaborer sur des solutions communes
+Cet espace collectif permet à l'équipe de :
+- Partager les outils et scripts de développement
+- Échanger les configurations d'environnement optimisées
+- Collaborer sur des projets communs
+- Co-construire les bonnes pratiques de l'équipe
 
 ## 📁 Structure
 
@@ -77,4 +81,5 @@ Ce dépôt utilise GitHub Actions pour :
 
 ---
 
-**Contribuez et partagez vos outils de développement avec la communauté !**
+**Équipe Indignons-nous - 10 septembre 2025**  
+*Partageons nos outils et construisons ensemble !*
