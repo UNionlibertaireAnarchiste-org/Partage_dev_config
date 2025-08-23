@@ -1,25 +1,25 @@
-# Site Indignons-nous 🚀
+# Indignons-nous 🚀
 
-**Bienvenue sur le wiki du site partagé du 10 septembre 2025**
+**Bienvenue sur l'espace collectif du 10 septembre 2025**
 
-Dépôt collaboratif de l'équipe Indignons-nous pour partager projets, scripts et configurations de développement.
+Espace collaboratif de l'équipe Indignons-nous pour échanger projets, scripts et configurations de développement.
 
 ## 🎯 Objectif
 
-Ce site partagé permet à l'équipe de :
-- Centraliser les outils et scripts de développement
-- Partager les configurations d'environnement optimisées
+Cet espace collectif permet à l'équipe de :
+- Partager les outils et scripts de développement
+- Échanger les configurations d'environnement optimisées
 - Collaborer sur des projets communs
-- Documenter les bonnes pratiques de l'équipe
+- Co-construire les bonnes pratiques de l'équipe
 
-## 📁 Structure du site
+## 📁 Structure
 
 ```
 indignons-nous/
-├── docs/           # Documentation équipe et guides techniques
-├── scripts/        # Scripts et outils de l'équipe
+├── docs/           # Documentation collective et guides techniques
+├── scripts/        # Scripts et outils partagés
 ├── examples/       # Projets de référence et templates
-├── configs/        # Configurations partagées
+├── configs/        # Configurations échangées
 └── .github/        # Automatisations et workflows
 ```
 
