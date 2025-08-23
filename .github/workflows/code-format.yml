@@ -44,10 +44,11 @@ jobs:
         chmod +x shfmt
         find . -name "*.sh" -exec ./shfmt -w {} +
     
-    - name: Commit changes
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git diff --staged --quiet || git commit -m "style: formatage automatique du code"
-        git push
+    - name: Créer PR pour formatage
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "style: formatage automatique du code"
+        title: "🎨 Formatage automatique du code"
+        body: "Formatage automatique appliqué aux fichiers modifiés"
+        branch: "auto/code-format"
