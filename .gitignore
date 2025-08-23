@@ -1,0 +1,17 @@
+# Fichiers générés automatiquement - ÉVITER CONFLITS
+INDEX.md
+
+# Fichiers temporaires
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Cache
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/

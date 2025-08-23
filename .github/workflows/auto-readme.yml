@@ -1,12 +1,9 @@
 name: Génération README automatique
 
 on:
-  push:
-    branches: [main]
-  workflow_run:
-    workflows: ["Tests automatiques"]
-    types: [completed]
-    branches: [main]
+  schedule:
+    - cron: '0 */6 * * *'  # Toutes les 6h au lieu de chaque push
+  workflow_dispatch:  # Manuel si besoin
   schedule:
     - cron: '0 2 * * *'
 
