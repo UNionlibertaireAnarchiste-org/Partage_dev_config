@@ -49,13 +49,26 @@ collectif-indignons-nous/
 
 ## 🤝 Comment contribuer
 
-1. **Fork** ce dépôt
-2. **Clone** votre fork localement
-3. **Créez** une branche pour votre contribution
-4. **Ajoutez** vos fichiers dans le dossier approprié
-5. **Commitez** avec un message descriptif
-6. **Poussez** vers votre fork
-7. **Ouvrez** une Pull Request
+### 📋 Étape 1 : Créer une Issue (OBLIGATOIRE)
+1. **Allez** dans l'onglet Issues
+2. **Cliquez** "New issue"
+3. **Choisissez** un template :
+   - "Nouvelle contribution" pour proposer un script/config
+   - "Demande de création de projet" pour un nouveau projet
+4. **Remplissez** le formulaire guidé
+5. **Attendez** validation/discussion de l'équipe
+
+### 🔧 Étape 2 : Développement
+6. **Fork** ce dépôt
+7. **Clone** votre fork localement
+8. **Créez** une branche pour votre contribution
+9. **Développez** selon les spécifications de l'Issue
+
+### 🚀 Étape 3 : Pull Request
+10. **Ajoutez** vos fichiers dans le dossier approprié
+11. **Commitez** avec un message descriptif
+12. **Poussez** vers votre fork
+13. **Ouvrez** une Pull Request en référençant l'Issue
 
 Consultez [CONTRIBUTING.md](CONTRIBUTING.md) pour plus de détails.
 
