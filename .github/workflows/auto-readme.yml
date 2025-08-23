@@ -6,6 +6,9 @@ on:
   schedule:
     - cron: '0 2 * * *'
 
+permissions:
+  contents: write
+
 jobs:
   update-readme:
     runs-on: ubuntu-latest
@@ -35,10 +38,11 @@ jobs:
         echo -e "\n## ⚙️ Automatisation" >> INDEX.md
         find scripts/automation -name "*" -type f -exec basename {} \; | sort >> INDEX.md
     
-    - name: Commit si changements
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add INDEX.md
-        git diff --staged --quiet || git commit -m "docs: mise à jour automatique de l'index"
-        git push
+    - name: Créer PR pour INDEX.md
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "docs: mise à jour automatique de l'index"
+        title: "🤖 Mise à jour automatique INDEX.md"
+        body: "Mise à jour automatique de l'index des contributions"
+        branch: "auto/update-index"
