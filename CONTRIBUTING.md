@@ -47,7 +47,6 @@ Merci de votre intérêt pour contribuer à Partage Dev ! Ce guide vous aidera �
 - Exemples d'utilisation
 
 ### Commits
-- Messages en français ou anglais
 - Format : `type: description courte`
 - Types : `feat`, `fix`, `docs`, `config`, `script`
 
