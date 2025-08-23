@@ -1,28 +1,46 @@
-# Collectif Indignons-nous bloquons tout
+# Partage Dev 🚀
 
-<img src="https://indignonsnous.fr/global/img/logo-inbt.svg" alt="Logo Indignons-nous" width="200">
-
-**Bienvenue sur l'espace collectif du 10 septembre 2025**
-
-Espace collaboratif de l'équipe Indignons-nous pour échanger projets, scripts et configurations de développement.
+Un dépôt communautaire pour partager des projets, scripts et configurations de développement entre développeurs/se.
 
 ## 🎯 Objectif
 
-Cet espace collectif permet à l'équipe de :
-- Partager les outils et scripts de développement
-- Échanger les configurations d'environnement optimisées
-- Collaborer sur des projets communs
-- Co-construire les bonnes pratiques de l'équipe
+Ce dépôt sert de plateforme où les développeurs peuvent :
+- Partager des scripts utiles et des outils de développement
+- Échanger des configurations d'environnement
+- Présenter des projets exemples et des templates
+- Collaborer sur des solutions communes
 
-## 📁 Structure du projet
+## 📁 Structure
 
 ```
-partage-dev/
-├── docs/           # Documentation et guides
-├── scripts/        # Scripts utiles pour le développement
-├── examples/       # Projets exemples et templates
-├── configs/        # Configurations d'environnement
-└── .github/        # Workflows et templates GitHub
+collectif-indignons-nous/
+├── README.md       # Documentation principale
+├── CONTRIBUTING.md # Guide de contribution
+├── LICENSE         # Licence AGPL-3.0
+├── docs/           # Documentation collective et guides techniques
+├── scripts/        # Scripts et outils partagés
+│   ├── python/     # Scripts Python
+│   ├── bash/       # Scripts Bash
+│   ├── javascript/ # Scripts JavaScript
+│   ├── php/        # Scripts PHP
+│   ├── go/         # Scripts Go
+│   ├── rust/       # Scripts Rust
+│   ├── java/       # Scripts Java
+│   ├── csharp/     # Scripts C#
+│   └── automation/ # Scripts d'automatisation
+├── examples/       # Projets de référence et templates
+│   ├── web/        # Exemples web
+│   ├── api/        # Exemples API
+│   ├── mobile/     # Exemples mobile
+│   └── desktop/    # Exemples desktop
+├── configs/        # Configurations échangées
+│   ├── vscode/     # Configuration VS Code
+│   ├── docker/     # Configuration Docker
+│   ├── ci-cd/      # Configuration CI/CD
+│   └── dotfiles/   # Fichiers de configuration
+└── .github/        # Automatisations et workflows
+    ├── workflows/  # GitHub Actions
+    └── ISSUE_TEMPLATE/ # Templates d'issues
 ```
 
 ## 🤝 Comment contribuer
