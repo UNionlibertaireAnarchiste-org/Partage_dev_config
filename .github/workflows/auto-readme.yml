@@ -17,7 +17,7 @@ jobs:
     
     - name: Générer index des contributions
       run: |
-        cat > INDEX.md << 'EOF'
+        cat > INDEX.md << EOF
         # Index des Contributions
         
         *Généré automatiquement le $(date)*
