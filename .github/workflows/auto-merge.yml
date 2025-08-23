@@ -1,0 +1,23 @@
+name: Auto-merge PR approuvées
+
+on:
+  pull_request_review:
+    types: [submitted]
+  check_suite:
+    types: [completed]
+
+jobs:
+  auto-merge:
+    if: github.event.review.state == 'approved' || github.event.check_suite.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Auto-merge si conditions remplies
+      uses: pascalgn/merge-action@v0.15.6
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        merge_method: squash
+        merge_commit_message: pull-request-title-and-description
+        merge_filter_author: dependabot[bot]
+        merge_labels: "!work-in-progress,!do-not-merge"
+        merge_remove_labels: "ready-to-merge"
+        merge_delete_branch: true

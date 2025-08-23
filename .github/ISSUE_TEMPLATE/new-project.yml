@@ -1,0 +1,53 @@
+name: Demande de création de projet
+description: Demander la création automatique d'un nouveau projet
+title: "[NOUVEAU] "
+labels: ["nouveau-projet"]
+body:
+  - type: dropdown
+    id: project_type
+    attributes:
+      label: Type de projet
+      description: Quel type de projet voulez-vous créer ?
+      options:
+        - Script Python
+        - Script Bash
+        - Script JavaScript
+        - Script PHP
+        - Script Go
+        - Script Rust
+        - Script Java
+        - Script C#
+        - Automatisation
+        - Exemple Web
+        - Exemple API
+        - Configuration
+    validations:
+      required: true
+  
+  - type: input
+    id: project_name
+    attributes:
+      label: Nom du projet
+      description: Nom du projet (sans espaces, utilisez des tirets)
+      placeholder: mon-super-projet
+    validations:
+      required: true
+  
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Décrivez brièvement votre projet
+      placeholder: Ce projet permet de...
+    validations:
+      required: true
+  
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: Je m'engage à compléter le projet après création
+          required: true
+        - label: J'ai vérifié qu'un projet similaire n'existe pas déjà
+          required: true

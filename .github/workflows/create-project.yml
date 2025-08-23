@@ -1,0 +1,123 @@
+name: Créer nouveau projet
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_type:
+        description: 'Type de projet'
+        required: true
+        type: choice
+        options:
+        - 'Script Python'
+        - 'Script Bash'
+        - 'Script JavaScript'
+        - 'Script PHP'
+        - 'Script Go'
+        - 'Script Rust'
+        - 'Script Java'
+        - 'Script C#'
+        - 'Automatisation'
+        - 'Exemple Web'
+        - 'Exemple API'
+        - 'Configuration'
+      project_name:
+        description: 'Nom du projet'
+        required: true
+        type: string
+
+jobs:
+  create-project:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Créer structure du projet
+      run: |
+        case "${{ github.event.inputs.project_type }}" in
+          "Script Python")
+            mkdir -p "scripts/python/${{ github.event.inputs.project_name }}"
+            cat > "scripts/python/${{ github.event.inputs.project_name }}/README.md" << 'EOF'
+        # ${{ github.event.inputs.project_name }}
+
+        ## Description
+        [Décrivez votre script Python]
+
+        ## Installation
+        ```bash
+        pip install -r requirements.txt
+        ```
+
+        ## Usage
+        ```bash
+        python ${{ github.event.inputs.project_name }}.py
+        ```
+        EOF
+            touch "scripts/python/${{ github.event.inputs.project_name }}/${{ github.event.inputs.project_name }}.py"
+            echo "# Dépendances Python" > "scripts/python/${{ github.event.inputs.project_name }}/requirements.txt"
+            ;;
+          "Script Bash")
+            mkdir -p "scripts/bash/${{ github.event.inputs.project_name }}"
+            cat > "scripts/bash/${{ github.event.inputs.project_name }}/README.md" << 'EOF'
+        # ${{ github.event.inputs.project_name }}
+
+        ## Description
+        [Décrivez votre script Bash]
+
+        ## Usage
+        ```bash
+        chmod +x ${{ github.event.inputs.project_name }}.sh
+        ./${{ github.event.inputs.project_name }}.sh
+        ```
+        EOF
+            echo "#!/bin/bash" > "scripts/bash/${{ github.event.inputs.project_name }}/${{ github.event.inputs.project_name }}.sh"
+            chmod +x "scripts/bash/${{ github.event.inputs.project_name }}/${{ github.event.inputs.project_name }}.sh"
+            ;;
+          "Exemple Web")
+            mkdir -p "examples/web/${{ github.event.inputs.project_name }}"
+            cat > "examples/web/${{ github.event.inputs.project_name }}/README.md" << 'EOF'
+        # ${{ github.event.inputs.project_name }}
+
+        ## Description
+        [Décrivez votre exemple web]
+
+        ## Installation
+        ```bash
+        npm install
+        ```
+
+        ## Démarrage
+        ```bash
+        npm start
+        ```
+        EOF
+            echo '{"name": "${{ github.event.inputs.project_name }}", "version": "1.0.0"}' > "examples/web/${{ github.event.inputs.project_name }}/package.json"
+            ;;
+          "Script PHP")
+            mkdir -p "scripts/php/${{ github.event.inputs.project_name }}"
+            echo "<?php" > "scripts/php/${{ github.event.inputs.project_name }}/${{ github.event.inputs.project_name }}.php"
+            ;;
+          "Script Go")
+            mkdir -p "scripts/go/${{ github.event.inputs.project_name }}"
+            echo "package main" > "scripts/go/${{ github.event.inputs.project_name }}/main.go"
+            ;;
+          "Script Rust")
+            mkdir -p "scripts/rust/${{ github.event.inputs.project_name }}"
+            echo "fn main() {}" > "scripts/rust/${{ github.event.inputs.project_name }}/main.rs"
+            ;;
+        esac
+    
+    - name: Créer Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "feat: ajout du projet ${{ github.event.inputs.project_name }}"
+        title: "🚀 Nouveau projet: ${{ github.event.inputs.project_name }}"
+        body: |
+          ## Nouveau projet créé automatiquement
+          
+          **Type:** ${{ github.event.inputs.project_type }}
+          **Nom:** ${{ github.event.inputs.project_name }}
+          
+          Structure créée avec templates de base.
+          Complétez le README.md et ajoutez votre code.
+        branch: "auto/new-project-${{ github.event.inputs.project_name }}"

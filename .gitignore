@@ -1,0 +1,30 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Environnements virtuels
+venv/
+env/
+.env
+
+# Dépendances
+node_modules/
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Logs
+*.log
+
+# Fichiers temporaires
+*.tmp
+*.temp
+
+# Secrets (ne jamais commiter)
+*.key
+*.pem
+config.json
+secrets.yml

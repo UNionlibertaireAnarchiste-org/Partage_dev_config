@@ -1,0 +1,32 @@
+name: Fermeture issues inactives
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Quotidien à minuit
+  workflow_dispatch:
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/stale@v8
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        stale-issue-message: |
+          Cette issue semble inactive depuis 30 jours. 
+          Elle sera fermée automatiquement dans 7 jours si aucune activité n'est détectée.
+          Commentez pour la maintenir ouverte.
+        close-issue-message: |
+          Issue fermée automatiquement pour inactivité.
+          N'hésitez pas à la rouvrir si nécessaire.
+        stale-pr-message: |
+          Cette PR semble inactive depuis 30 jours.
+          Elle sera fermée automatiquement dans 7 jours si aucune activité n'est détectée.
+        close-pr-message: |
+          PR fermée automatiquement pour inactivité.
+        days-before-stale: 30
+        days-before-close: 7
+        stale-issue-label: 'stale'
+        stale-pr-label: 'stale'
+        exempt-issue-labels: 'pinned,security,enhancement'
+        exempt-pr-labels: 'pinned,security'

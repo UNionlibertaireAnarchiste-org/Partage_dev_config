@@ -1,0 +1,29 @@
+name: Mise à jour des dépendances
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # Chaque lundi à minuit
+  workflow_dispatch:
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Mise à jour des actions GitHub
+      run: |
+        sed -i 's/@v[0-9]/@v4/g' .github/workflows/*.yml
+    
+    - name: Vérifier les requirements.txt
+      run: |
+        find . -name "requirements.txt" -exec pip-compile --upgrade {} \; || echo "Pas de requirements.txt trouvés"
+    
+    - name: Créer PR si changements
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "chore: mise à jour automatique des dépendances"
+        title: "🔄 Mise à jour automatique des dépendances"
+        body: "Mise à jour automatique des dépendances et versions d'actions GitHub."
+        branch: auto-update-dependencies

@@ -1,0 +1,44 @@
+name: Nouvelle contribution
+description: Proposer une nouvelle contribution au dépôt
+title: "[CONTRIB] "
+labels: ["contribution"]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Catégorie
+      description: Type de contribution
+      options:
+        - Script Python
+        - Script Bash
+        - Script JavaScript
+        - Script PHP
+        - Script Go
+        - Script Rust
+        - Script Java
+        - Script C#
+        - Automatisation
+        - Exemple Web
+        - Exemple API
+        - Configuration
+        - Documentation
+    validations:
+      required: true
+  
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Décrivez votre contribution
+      placeholder: Que fait votre script/exemple/configuration ?
+    validations:
+      required: true
+  
+  - type: textarea
+    id: usage
+    attributes:
+      label: Utilisation
+      description: Comment utiliser votre contribution
+      placeholder: Instructions d'installation et d'usage
+    validations:
+      required: true

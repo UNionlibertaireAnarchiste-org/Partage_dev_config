@@ -1,0 +1,48 @@
+name: Catégorisation automatique
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  categorize:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Ajouter labels automatiques
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { data: files } = await github.rest.pulls.listFiles({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.issue.number
+          });
+          
+          const labels = [];
+          
+          files.forEach(file => {
+            if (file.filename.startsWith('scripts/python/')) labels.push('python');
+            if (file.filename.startsWith('scripts/bash/')) labels.push('bash');
+            if (file.filename.startsWith('scripts/javascript/')) labels.push('javascript');
+            if (file.filename.startsWith('scripts/php/')) labels.push('php');
+            if (file.filename.startsWith('scripts/go/')) labels.push('go');
+            if (file.filename.startsWith('scripts/rust/')) labels.push('rust');
+            if (file.filename.startsWith('scripts/java/')) labels.push('java');
+            if (file.filename.startsWith('scripts/csharp/')) labels.push('csharp');
+            if (file.filename.startsWith('scripts/automation/')) labels.push('automation');
+            if (file.filename.startsWith('examples/web/')) labels.push('web');
+            if (file.filename.startsWith('examples/api/')) labels.push('api');
+            if (file.filename.startsWith('configs/')) labels.push('configuration');
+            if (file.filename.startsWith('docs/')) labels.push('documentation');
+          });
+          
+          if (labels.length > 0) {
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: [...new Set(labels)]
+            });
+          }

@@ -1,0 +1,46 @@
+name: Validation structure
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Vérifier catégorisation
+      run: |
+        # Vérifier que les fichiers sont dans les bonnes catégories
+        for file in $(git diff --name-only origin/main...HEAD); do
+          case "$file" in
+            scripts/*)
+              if [[ ! "$file" =~ scripts/(python|bash|javascript|automation)/ ]]; then
+                echo "❌ $file doit être dans une sous-catégorie de scripts/"
+                exit 1
+              fi
+              ;;
+            examples/*)
+              if [[ ! "$file" =~ examples/(web|api|mobile|desktop)/ ]]; then
+                echo "❌ $file doit être dans une sous-catégorie d'examples/"
+                exit 1
+              fi
+              ;;
+            configs/*)
+              if [[ ! "$file" =~ configs/(vscode|docker|ci-cd|dotfiles)/ ]]; then
+                echo "❌ $file doit être dans une sous-catégorie de configs/"
+                exit 1
+              fi
+              ;;
+          esac
+        done
+        echo "✅ Structure validée"
+    
+    - name: Vérifier README obligatoires
+      run: |
+        for dir in $(find scripts examples configs -mindepth 2 -maxdepth 2 -type d); do
+          if [[ ! -f "$dir/README.md" ]]; then
+            echo "⚠️ README.md manquant dans $dir"
+          fi
+        done

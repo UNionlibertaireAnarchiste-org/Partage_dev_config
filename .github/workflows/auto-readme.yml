@@ -1,0 +1,44 @@
+name: Génération README automatique
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 2 * * *'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Générer index des contributions
+      run: |
+        cat > INDEX.md << 'EOF'
+        # Index des Contributions
+        
+        *Généré automatiquement le $(date)*
+        
+        ## 📊 Statistiques
+        - Scripts: $(find scripts -name "*.py" -o -name "*.sh" -o -name "*.js" | wc -l)
+        - Exemples: $(find examples -mindepth 2 -name "README.md" | wc -l)
+        - Configurations: $(find configs -name "*" -type f | wc -l)
+        
+        ## 🐍 Scripts Python
+        EOF
+        
+        find scripts/python -name "*.py" -exec basename {} \; | sort >> INDEX.md
+        
+        echo -e "\n## 🔧 Scripts Bash" >> INDEX.md
+        find scripts/bash -name "*.sh" -exec basename {} \; | sort >> INDEX.md
+        
+        echo -e "\n## ⚙️ Automatisation" >> INDEX.md
+        find scripts/automation -name "*" -type f -exec basename {} \; | sort >> INDEX.md
+    
+    - name: Commit si changements
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add INDEX.md
+        git diff --staged --quiet || git commit -m "docs: mise à jour automatique de l'index"
+        git push

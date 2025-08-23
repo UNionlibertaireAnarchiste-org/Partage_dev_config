@@ -1,0 +1,48 @@
+name: Assignation automatique reviewers
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  assign-reviewers:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Assigner reviewers selon catégorie
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { data: files } = await github.rest.pulls.listFiles({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.issue.number
+          });
+          
+          let reviewers = [];
+          
+          files.forEach(file => {
+            if (file.filename.startsWith('scripts/python/')) reviewers.push('python-expert');
+            if (file.filename.startsWith('scripts/bash/')) reviewers.push('bash-expert');
+            if (file.filename.startsWith('scripts/javascript/')) reviewers.push('js-expert');
+            if (file.filename.startsWith('examples/web/')) reviewers.push('frontend-expert');
+            if (file.filename.startsWith('examples/api/')) reviewers.push('backend-expert');
+            if (file.filename.startsWith('configs/docker/')) reviewers.push('devops-expert');
+            if (file.filename.startsWith('configs/ci-cd/')) reviewers.push('cicd-expert');
+          });
+          
+          // Fallback: assigner un reviewer général si pas de catégorie spécifique
+          if (reviewers.length === 0) reviewers.push('general-reviewer');
+          
+          // Supprimer les doublons et l'auteur de la PR
+          reviewers = [...new Set(reviewers)].filter(r => r !== context.actor);
+          
+          if (reviewers.length > 0) {
+            await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              reviewers: reviewers.slice(0, 2) // Max 2 reviewers
+            });
+          }

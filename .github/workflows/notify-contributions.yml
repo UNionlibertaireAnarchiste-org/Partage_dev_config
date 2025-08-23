@@ -1,0 +1,31 @@
+name: Notifications nouvelles contributions
+
+on:
+  pull_request:
+    types: [opened]
+  issues:
+    types: [opened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Ajouter message de bienvenue
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `👋 Merci @${{ github.actor }} pour votre contribution !
+            
+            Votre PR sera automatiquement :
+            - ✅ Testée et validée
+            - 🏷️ Catégorisée avec des labels
+            - 👥 Assignée à des reviewers experts
+            - 🔄 Mergée si approuvée et tests passés
+            
+            📖 Consultez le [guide de contribution](CONTRIBUTING.md) pour plus d'infos.`
+          })

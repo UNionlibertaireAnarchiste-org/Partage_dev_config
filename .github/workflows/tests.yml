@@ -1,0 +1,34 @@
+name: Tests automatiques
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Vérifier structure des dossiers
+      run: |
+        test -d docs && echo "✓ Dossier docs présent"
+        test -d scripts && echo "✓ Dossier scripts présent"
+        test -d examples && echo "✓ Dossier examples présent"
+        test -d configs && echo "✓ Dossier configs présent"
+    
+    - name: Vérifier README obligatoires
+      run: |
+        find . -type d -name "*" -not -path "./.git*" -exec test -f {}/README.md \; -print || echo "Attention: README manquant dans certains dossiers"
+    
+    - name: Vérifier scripts Python
+      if: hashFiles('scripts/**/*.py') != ''
+      run: |
+        python -m py_compile scripts/**/*.py
+    
+    - name: Vérifier scripts Bash
+      if: hashFiles('scripts/**/*.sh') != ''
+      run: |
+        find scripts -name "*.sh" -exec bash -n {} \;
