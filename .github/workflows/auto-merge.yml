@@ -17,13 +17,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Auto-merge si conditions remplies
-      uses: pascalgn/merge-action@v0.15.6
+      uses: actions/github-script@v7
       continue-on-error: true
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        merge_method: squash
-        merge_commit_message: pull-request-title-and-description
-        merge_filter_author: dependabot[bot]
-        merge_labels: "!work-in-progress,!do-not-merge"
-        merge_remove_labels: "ready-to-merge"
-        merge_delete_branch: true
+        script: |
+          const pr = context.payload.pull_request;
+          if (!pr) return;
+          
+          try {
+            // Vérifier si la PR est approuvée
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number
+            });
+            
+            const approved = reviews.some(review => review.state === 'APPROVED');
+            
+            if (approved && !pr.labels.some(label => ['work-in-progress', 'do-not-merge'].includes(label.name))) {
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+                merge_method: 'squash'
+              });
+              console.log('PR mergée automatiquement');
+            }
+          } catch (error) {
+            console.log('Auto-merge échoué:', error.message);
+          }
