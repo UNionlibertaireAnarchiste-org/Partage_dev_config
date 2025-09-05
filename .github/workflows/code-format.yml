@@ -1,0 +1,60 @@
+name: Formatage automatique du code
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.PAT_TOKEN }}
+        ref: ${{ github.head_ref }}
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install formatters
+      run: |
+        pip install black isort
+        npm install -g prettier
+    
+    - name: Format Python code
+      run: |
+        find . -name "*.py" -exec black {} +
+        find . -name "*.py" -exec isort {} +
+    
+    - name: Format JavaScript/JSON/Markdown
+      run: |
+        prettier --write "**/*.{js,json,md,yml,yaml}"
+    
+    - name: Format Shell scripts
+      run: |
+        # Install shfmt
+        curl -L https://github.com/mvdan/sh/releases/download/v3.7.0/shfmt_v3.7.0_linux_amd64 -o shfmt
+        chmod +x shfmt
+        if [ -n "$(find . -name "*.sh" -print -quit)" ]; then
+          find . -name "*.sh" -exec ./shfmt -w {} +
+        fi
+    
+    - name: Créer PR pour formatage
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.PAT_TOKEN }}
+        commit-message: "style: formatage automatique du code"
+        title: "🎨 Formatage automatique du code"
+        body: "Formatage automatique appliqué aux fichiers modifiés"
+        branch: "auto/code-format"
