@@ -30,6 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Créer structure du projet
       run: |
@@ -118,6 +120,9 @@ jobs:
           **Type:** ${{ github.event.inputs.project_type }}
           **Nom:** ${{ github.event.inputs.project_name }}
           
+          Structure créée avec templates de base.
+          Complétez le README.md et ajoutez votre code.
+        branch: "auto/new-project-${{ github.event.inputs.project_name }}"
           Structure créée avec templates de base.
           Complétez le README.md et ajoutez votre code.
         branch: "auto/new-project-${{ github.event.inputs.project_name }}"
